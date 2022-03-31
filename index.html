@@ -6,7 +6,15 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tropizz | Coffee</title>
+
+    <!--  CSS  -->
     <link rel="stylesheet" href="./css/style.css">
+<!--    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>-->
+
+    <!--  JS  -->
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" defer></script>
+<!--    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js" defer></script>-->
+    <script src="./js/main.js" defer></script>
 </head>
 <body>
 <nav id="nav">
@@ -16,29 +24,184 @@
         </div>
         <div class="links">
             <ul>
-                <li><a href="#" class="active">Home</a></li>
+                <li><a href="./index.html" class="active">Home</a></li>
                 <li><a href="#">Products</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">About us</a></li>
                 <li><a href="#">Account</a></li>
             </ul>
+            <div id="hiddenMenu">
+                <i data-feather="menu"></i>
+                <ul class="hide">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Account</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
-
-<main id="main">
-    <div class="container">
-        <h1>Main</h1>
+<header id="offer">
+    <div class="container-fluid">
+        <div class="offer_img">
+            <img src="./img/coffeeBanner.jpg" alt="Coffee banner">
+        </div>
+        <div class="offer_text">
+            <h1>
+                Lorem ipsum dolor sit amet.
+            </h1>
+            <h3>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet, quis!
+            </h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci cumque deleniti dolores ex fugiat illum impedit itaque iusto libero modi odit, officia officiis quae quia sapiente similique sit velit voluptatum.
+            </p>
+        </div>
     </div>
+</header>
+<main id="main">
+    <section id="mainContent">
+        <div class="container">
+            <h1>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, repellat.
+            </h1>
+            <h3>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis ea nulla, perferendis reiciendis
+                repudiandae ullam?
+            </h3>
+            <img class="coffeeBeans" src="./img/coffeBeans.jpg" alt="coffee beans">
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus amet aspernatur beatae cum distinctio
+                ducimus eius, eligendi, esse exercitationem illo inventore ipsam libero minima officiis placeat rem
+                rerum sunt suscipit voluptate voluptatibus! Adipisci dolor ducimus eius eos hic id inventore ipsum iure
+                minus, non officiis optio quia quibusdam quod vero?
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus aliquid architecto autem beatae cum debitis deleniti eius enim et ex facere id illo ipsum iste laboriosam magni minima molestiae nemo nihil nostrum numquam officiis placeat quae, quam quas quo recusandae reiciendis repellat repellendus sequi sint vero voluptas. Autem consequatur eos impedit itaque quisquam. Consequuntur distinctio eos error hic itaque pariatur possimus quae sint vitae.
+            </p>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus beatae consequatur culpa deserunt dolores doloribus dolorum earum et fugiat ipsam iste, necessitatibus nisi obcaecati omnis reprehenderit tempora voluptas voluptatem voluptatibus.
+            </p>
+            <img class="breakLine" src="./img/breakLine.png" alt="break line">
+        </div>
+    </section>
+    <section class="cardsSection">
+        <div class="container">
+            <h1>Take it!</h1>
+            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea, harum.</h3>
+            <div class="cards">
+                <div class="card">
+                    <div class="cardImg">
+                        <img src="./img/coffee1.png" alt="Coffee">
+                    </div>
+                    <div class="cardText">
+                        <h3>Lorem ipsum dolor sit.</h3>
+                        <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda at blanditiis doloribus ex ipsam, magni nemo nobis nostrum placeat quisquam quo quod recusandae saepe temporibus unde. Dicta tenetur ut voluptates.</p>
+                        <a href="#">See more <i data-feather="arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="cardImg">
+                        <img src="./img/coffee2.png" alt="Coffee">
+                    </div>
+                    <div class="cardText">
+                        <h3>Lorem ipsum dolor sit.</h3>
+                        <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad assumenda, beatae consequuntur corporis dolorem ex facere laborum molestias omnis, perspiciatis quos tempora veritatis voluptatum? Alias distinctio dolorem illum inventore laboriosam natus optio quisquam voluptatum? Adipisci aliquid, at atque exercitationem illo iusto maiores maxime necessitatibus neque obcaecati possimus provident quis voluptatum!</p>
+                        <a href="#">See more <i data-feather="arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="cardImg">
+                        <img src="./img/coffee3.png" alt="Coffee">
+                    </div>
+                    <div class="cardText">
+                        <h3>Lorem ipsum dolor sit.</h3>
+                        <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum deserunt eos ipsum nulla quaerat quod totam ut vitae! Alias aspernatur consectetur cupiditate dolores error, explicabo facilis, harum perspiciatis quasi quod repellendus sed soluta tenetur! Corporis deserunt doloremque excepturi harum quam!</p>
+                        <a href="#">See more <i data-feather="arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+
+
+
+<!--            <div class="swiper">-->
+<!--                <div class="swiper-wrapper">-->
+<!--                    <div class="swiper-slide">Slide 1</div>-->
+<!--                    <div class="swiper-slide">Slide 2</div>-->
+<!--                    <div class="swiper-slide">Slide 3</div>-->
+<!--                </div>-->
+
+<!--                <div class="swiper-button-prev"></div>-->
+<!--                <div class="swiper-button-next"></div>-->
+<!--            </div>-->
+        </div>
+    </section>
+    <section id="info">
+        <div class="container">
+            <h1>Lorem ipsum dolor sit amet.</h1>
+            <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit, perspiciatis?</h3>
+            <div class="articles">
+                <div class="article">
+                    <div class="articleText">
+                        <h1>Lorem ipsum dolor sit amet.</h1>
+                        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing.</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam amet assumenda deleniti, dignissimos magni nemo nulla placeat praesentium quae quaerat quas quisquam quos similique sint unde voluptatem. Debitis, suscipit?
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident quo totam vero voluptates. A ab alias aliquam animi aperiam assumenda, aut blanditiis deleniti eius error eum, facere id illum inventore ipsa laborum, libero maxime modi nam odio quam quod reiciendis sapiente sequi sit temporibus ut veritatis vitae voluptate voluptatem voluptatum!
+                        </p>
+                    </div>
+                    <div class="articleImg">
+                        <img src="./img/article1.jpg" alt="article image">
+                    </div>
+                </div>
+                <div class="article">
+                    <div class="articleText">
+                        <h1>Lorem ipsum dolor sit amet.</h1>
+                        <h3>Lorem ipsum dolor sit amet, consectetur adipisicing.</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aliquam amet assumenda deleniti, dignissimos magni nemo nulla placeat praesentium quae quaerat quas quisquam quos similique sint unde voluptatem. Debitis, suscipit?
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident quo totam vero voluptates. A ab alias aliquam animi aperiam assumenda, aut blanditiis deleniti eius error eum, facere id illum inventore ipsa laborum, libero maxime modi nam odio quam quod reiciendis sapiente sequi sit temporibus ut veritatis vitae voluptate voluptatem voluptatum!
+                        </p>
+                    </div>
+                    <div class="articleImg">
+                        <img src="./img/article2.jpg" alt="article image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
+<div class="wave"></div>
 
 <footer id="footer">
     <div class="container">
-        <h1>Footer</h1>
+        <div class="footer_links">
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="#">Products</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#">Partners</a></li>
+                <li><a href="#">Help</a></li>
+            </ul>
+        </div>
+        <div class="mini_contacts">
+            <a href="tel:+77001234567">+7 (700) 123 45 67</a>
+            <a href="mailto:tropizz@example.com&cc=tropizz@example.com">tropizz@example.com</a>
+        </div>
     </div>
 </footer>
 
-<script src="./js/main.js"></script>
+
 </body>
 </html>
