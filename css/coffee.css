@@ -13,7 +13,7 @@ main .container{
 .productLinksList ul{
     margin: 0;
     padding: 0;
-    list-style: url("../img/coffee.svg");
+    list-style: inside url("../img/coffee.svg");
 
     position: sticky;
     top: 5rem;

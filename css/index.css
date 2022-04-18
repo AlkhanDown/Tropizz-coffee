@@ -34,6 +34,11 @@
 
 /*Main*/
 
+/*main, main *{*/
+/*    position: relative;*/
+/*    z-index: 0;*/
+/*}*/
+
 main > * :is(h1, h2, h3, h4, h5){
     text-align: center;
 }
@@ -173,9 +178,15 @@ main section+section{
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1350px) {
     .offer_text{
         font-size: 120%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .offer_text{
+        font-size: 110%;
     }
 }
 
@@ -203,10 +214,14 @@ main section+section{
     }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 620px) {
     .offer_text{
-        right: 5%;
+        right: calc((100% - var(--container-width)) / 2);
+        text-align: center;
     }
+}
+
+@media screen and (max-width: 425px) {
     .card{
         width: 90%;
     }

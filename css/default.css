@@ -61,6 +61,11 @@ ul{
     padding: 0;
 }
 
+.clicked{
+    transition: all .5s;
+    transform: rotate(-90deg);
+}
+
 
 .hide{
     transition: all .5s ease;
@@ -131,9 +136,16 @@ ul{
         height: 5vw;
     }
 }
+
 @media screen and (max-width: 768px) {
     #goTopBtn{
-        width: 6vw;
-        height: 6vw;
+        width: calc(2vw + 30px);
+        height: calc(2vw + 30px);
+    }
+}
+
+@media screen and (max-width: 550px) {
+    #goTopBtn{
+        right: 8%;
     }
 }

@@ -3,7 +3,11 @@ const hiddenMenu = document.querySelector('#hiddenMenu > ul')
 
 const goTopBtn = document.querySelector('#goTopBtn')
 
-ScrollReveal().reveal('div', {delay: 25, reset: true})
+ScrollReveal().reveal('div:not(:is(.container, .links, #hiddenMenu))', {
+    delay: 25,
+    reset: true,
+    distance: '5em'
+})
 feather.replace()
 
 // const swiper = new Swiper('.swiper', {
@@ -19,6 +23,10 @@ feather.replace()
 
 menuIcon.addEventListener('click', e => {
     hiddenMenu.classList.toggle('hide')
+})
+
+menuIcon.addEventListener('click', () => {
+    menuIcon.querySelector('svg').classList.toggle('clicked')
 })
 
 const goTopBtnAnimation = () => {

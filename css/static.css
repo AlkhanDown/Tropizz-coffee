@@ -67,12 +67,16 @@ nav .container {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    z-index: 1;
+    z-index: 5;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#hiddenMenu svg{
+    transition: all .5s;
 }
 
 #hiddenMenu li {
