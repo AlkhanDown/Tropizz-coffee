@@ -39,11 +39,13 @@ body{
 a{
     color: rgba(var(--main-color), 1);
     text-decoration: none;
+    outline: none;
 
     cursor: url("../img/coffeeSelectPointer.png"), auto;
+    transition: all .5s ease-in-out;
 }
 
-a:hover{
+a:is(:hover, :focus){
     text-decoration: underline;
 }
 
@@ -97,6 +99,7 @@ ul{
 
 #goTopBtn{
     position: fixed;
+    z-index: 10;
     bottom: 8%;
     right: 5%;
     transition: all .5s ease;
@@ -105,8 +108,8 @@ ul{
     justify-content: center;
     align-items: center;
 
-    width: 3vw;
-    height: 3vw;
+    width: 4vw;
+    height: 4vw;
 
     background-color: rgba(255, 255, 255, 1);
     border: 1px solid rgba(var(--second-color), .3);
@@ -138,6 +141,10 @@ ul{
 }
 
 @media screen and (max-width: 768px) {
+    :root {
+        --container-width: 90%;
+    }
+
     #goTopBtn{
         width: calc(2vw + 30px);
         height: calc(2vw + 30px);
@@ -147,5 +154,11 @@ ul{
 @media screen and (max-width: 550px) {
     #goTopBtn{
         right: 8%;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    :root {
+        --container-width: 95%;
     }
 }

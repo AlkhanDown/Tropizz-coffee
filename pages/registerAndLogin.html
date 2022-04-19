@@ -14,17 +14,10 @@
     <link rel="stylesheet" href="../css/registerAndLogin.css">
 
     <!--  JS  -->
-<!--    <script src="../node_modules/firebase/firebase-app.js" type="module"></script>-->
-<!--    <script src="../node_modules/firebase/firebase-auth.js" type="module"></script>-->
-<!--    <script defer src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js" type="module"></script>-->
-<!--    <script defer src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js" type="module"></script>-->
-<!--    <script defer src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>-->
-<!--    <script src="../js/init-firebase.js"></script>-->
-
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" defer></script>
     <script src="https://unpkg.com/scrollreveal" defer></script>
-    <script src="../js/registerAndLogin.js" type="module"></script>
-    <script src="../js/init-firebase.js" type="module"></script>
+    <script src="../js/registerAndLogin.js" defer></script>
+    <script src="../js/firebase.js" type="module" defer></script>
 
 </head>
 <body>
@@ -40,7 +33,10 @@
                         <input type="email" id="login_email">
                         <label for="login_password">Password</label>
                         <input type="password" id="login_password">
-                        <button id="loginBtn">Login</button>
+                        <div class="btnGroup">
+                            <button id="loginBtn">Login</button>
+                            <button id="loginWithGoogleBtn">Login with Google</button>
+                        </div>
                     </form>
                     <a href="#" id="goRegister">Register</a>
                 </div>
@@ -55,7 +51,9 @@
                         <input type="email" id="register_email">
                         <label for="register_password">Password</label>
                         <input type="password" id="register_password">
-                        <button id="registerBtn">Register</button>
+                        <div class="btnGroup">
+                            <button id="registerBtn">Register</button>
+                        </div>
                     </form>
                     <a href="#" id="goLogin">Login</a>
                 </div>
@@ -66,6 +64,5 @@
 </main>
 
 <div id="goMain"><a href="../index.html"><i data-feather="arrow-left"></i></a></div>
-
 </body>
 </html>

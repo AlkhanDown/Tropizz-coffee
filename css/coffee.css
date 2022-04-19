@@ -1,167 +1,79 @@
-/*Products*/
+a{
+    display: flex;
+    align-items: center;
+}
 
-main .container{
+#coffee .container-fluid{
     display: flex;
     justify-content: space-between;
-    gap: 2rem;
 }
 
-.productLinksList{
-    width: 25%;
-}
-
-.productLinksList ul{
-    margin: 0;
-    padding: 0;
-    list-style: inside url("../img/coffee.svg");
-
-    position: sticky;
-    top: 5rem;
-}
-
-.productLinksList li{
-    font-size: 1.1rem;
-    padding: 1rem 0;
-}
-
-.productLinksList li+li{
-    border-top: 1px solid rgba(var(--second-color), .15);
-}
-
-
-
-
-.productsList{
-    width: 75%;
-}
-
-.productsList h2{
-    border-bottom: 1px solid rgba(var(--second-color), .1);
-}
-
-.cards{
+.imagePart{
     display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    width: 50%;
+    background: no-repeat center / cover;
+    box-shadow: .5rem .5rem 15px rgba(var(--main-color), .15);
 }
 
-.cards+h2{
-    margin-top: 4rem;
-}
-
-.cards::after{
+.imagePart::after{
     content: '';
-    width: calc((100% - 4rem) / 3);
+    backdrop-filter: blur(7px);
+
+    position: absolute;
+    inset: 0;
+    z-index: 1;
 }
 
-.card{
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    flex-direction: column;
-    flex-basis: calc((100% - 4rem) / 3);
-    /*flex-grow: 1;*/
-    flex-wrap: wrap;
+.imagePart img{
+    position: absolute;
+    z-index: 2;
 
-    box-shadow: 1rem 1rem 5rem rgba(var(--second-color), .125);
-    border: 1px solid rgba(var(--second-color), .15);
-    border-radius: 15px;
-
-    /*width: 30%;*/
-}
-
-
-.cardImg img{
-    width: 100%;
+    width: 50%;
     object-fit: cover;
-    object-position: center 15%;
-
-    border-radius: 15px 15px 0 0;
-
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 1;
+    box-shadow: .3rem .3rem 20px rgba(var(--main-color), .7);
+    border-radius: 10px;
 }
 
-.cardText{
-    padding: 1rem;
+.infoPart{
+    width: 50%;
+
+    padding: 2rem 0;
 }
 
-.card a{
-    display: inline-flex;
-    align-items: center;
-    gap: .3rem;
-
-    padding: .25rem 0;
+.infoContainer{
+    width: 70%;
+    margin: 0 auto;
 }
 
-
-
-
-
-@media (max-width: 1440px) {
-    /*.cards{*/
-    /*    flex-direction: column;*/
-    /*    align-items: center;*/
-    /*}*/
-    .card{
-        flex-basis: calc((100% - 2rem) / 2);
-    }
-    /*.card+.card{*/
-    /*    margin-top: 5rem;*/
-    /*}*/
-    /*.cardImg img{*/
-    /*    aspect-ratio: 4 / 3;*/
-    /*}*/
-}
-
-/*@media screen and (max-width: 1200px) {*/
-/*    .offer_text{*/
-/*        font-size: 120%;*/
-/*    }*/
-/*}*/
-
-/*@media screen and (max-width: 1024px) {*/
-/**/
-/*}*/
-
-@media screen and (max-width: 768px) {
-    main .container{
+@media screen and (max-width: 768px){
+    #coffee .container-fluid{
         flex-direction: column;
     }
 
-    .productLinksList{
-        width: 100%;
+    .imagePart{
+        position: unset;
+
+        width: unset;
+        padding: 5rem 0;
     }
 
-    .productsList{
-        width: 100%;
+    .imagePart img{
+        position: unset;
+
+        /*width: unset;*/
     }
 
-    /*.card{*/
-    /*    flex-basis: calc((100% - 2rem) / 2);*/
-    /*}*/
+    .infoPart{
+        width: unset;
+    }
 
-
-/*    .offer_text{*/
-/*        font-size: 100%;*/
-/*    }*/
-/*    .breakLine{*/
-/*        width: 60%;*/
-/*    }*/
-/*    .article{*/
-/*        flex-direction: column-reverse !important;*/
-/*    }*/
-/*    .articleText{*/
-/*        width: 80%;*/
-/*    }*/
-/*    .articleImg{*/
-/*        width: 80%;*/
-/*    }*/
-}
-
-@media screen and (max-width: 425px) {
-    .card{
-        flex-basis: 100%;
+    .infoContainer{
+        width: var(--container-width);
     }
 }

@@ -68,6 +68,10 @@ input{
     border: 2px solid rgba(var(--second-color), .5);
 }
 
+input:focus{
+    border: 2px solid rgba(var(--main-color), .8);
+}
+
 h1{
     font-family: var(--bebas), sans-serif;
     letter-spacing: 8px;
@@ -116,18 +120,33 @@ main .container > *{
  }
 
 .loginForm button, .registerForm button{
-    width: min-content;
-    align-self: end;
-
     padding: .5rem;
     background-color: transparent;
-    border: 2px solid rgba(var(--second-color), .5);
+    border: 2px solid rgba(var(--second-color), .4);
 
     transition: all .3s ease-in-out;
 }
 
+.btnGroup{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+
+    margin-top: 1.5rem;
+}
+
+button{
+    outline: none;
+    transition: all .5s ease-in-out;
+}
+
 button:hover{
     background-color: rgba(var(--second-color), .1);
+}
+
+button:focus{
+    border: 2px solid rgba(var(--main-color), .8);
 }
 
 /* Login */
@@ -158,4 +177,20 @@ button:hover{
 .registerImg{
     box-shadow: -.5rem 0 30px rgba(var(--second-color), .1);
     background-image: url(../img/coffeBeans.jpg);
+}
+
+@media screen and (max-width: 768px){
+    .loginImg, .registerImg{
+        display: none;
+    }
+    .loginForm, .registerForm{
+        width: var(--container-width);
+        margin: 0 auto;
+    }
+    #goMain{
+        left: 10%;
+        top: 5%;
+        width: calc(4vw + 1.2rem);
+        height: calc(4vw + 1.2rem);
+    }
 }

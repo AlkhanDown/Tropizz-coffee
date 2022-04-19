@@ -58,6 +58,7 @@ nav .container {
 }
 
 #hiddenMenu ul {
+    font-size: 90%;
     background-color: #fff;
     border: 1px solid rgba(var(--second-color), .4);
     border-radius: 15px;
@@ -100,10 +101,9 @@ nav .container {
 
 .wave {
     width: 100%;
-    min-height: 400px;
+    min-height: 450px;
     background: url(../img/wave.svg) no-repeat center / cover;
     user-select: none;
-    margin-top: 100px;
 }
 
 /*Footer*/
@@ -159,27 +159,11 @@ footer .container {
     }
 }
 
-@media screen and (max-width: 1200px) {
-
-}
-
-@media screen and (max-width: 1024px) {
-
-}
-
 @media screen and (max-width: 768px) {
-    :root {
-        --container-width: 90%;
-    }
-
     #hiddenMenu ul {
         left: unset;
         right: 0;
         transform: none;
-    }
-
-    .wave {
-        margin-top: 0;
     }
 }
 
@@ -194,15 +178,5 @@ footer .container {
     .mini_contacts{
         align-items: start;
         width: 100%;
-    }
-}
-
-@media screen and (max-width: 425px) {
-    :root {
-        --container-width: 95%;
-    }
-
-    .wave {
-        margin-top: 0;
     }
 }
