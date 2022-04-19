@@ -1,6 +1,7 @@
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js'
 import {
     getAuth,
+    signOut,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     GoogleAuthProvider,
@@ -27,7 +28,9 @@ const registerBtn = document.querySelector('#registerBtn')
 const loginBtn = document.querySelector('#loginBtn')
 const loginWithGoogleBtn = document.querySelector('#loginWithGoogleBtn')
 
-registerBtn.addEventListener('click', e => {
+const signOutBtns = document.querySelectorAll('.signOut')
+
+registerBtn?.addEventListener('click', e => {
     const email = document.querySelector('#register_email').value
     const password = document.querySelector('#register_password').value
 
@@ -48,7 +51,7 @@ registerBtn.addEventListener('click', e => {
         })
 })
 
-loginBtn.addEventListener('click', e => {
+loginBtn?.addEventListener('click', e => {
     const email = document.querySelector('#login_email').value
     const password = document.querySelector('#login_password').value
 
@@ -59,7 +62,11 @@ loginBtn.addEventListener('click', e => {
 
             update(ref(database, `users/${user.uid}`), {last_login: log_date})
                 .then(() => {
-                    console.log(user)
+                    sessionStorage.setItem('user', JSON.stringify({
+                        userId: user.uid,
+                        email
+                    }))
+                    window.history.go(-1)
                 })
                 .catch(e => {
                     console.error(e)
@@ -70,7 +77,7 @@ loginBtn.addEventListener('click', e => {
         })
 })
 
-loginWithGoogleBtn.addEventListener('click', e => {
+loginWithGoogleBtn?.addEventListener('click', e => {
     signInWithPopup(auth, googleProvider)
         .then((userCredential) => {
             const user = userCredential.user
@@ -78,7 +85,15 @@ loginWithGoogleBtn.addEventListener('click', e => {
 
             update(ref(database, `users/${user.uid}`), {last_login: log_date})
                 .then(() => {
-                    console.log(user)
+                    sessionStorage.setItem('user', JSON.stringify({
+                        userId: user.uid,
+                        email: user.email
+                    }))
+                    window.history.go(-1)
+
+                    // console.log(user)
+                    // console.log(window.history)
+                    // window.location.replace()
                 })
                 .catch(e => {
                     console.error(e)
@@ -87,4 +102,26 @@ loginWithGoogleBtn.addEventListener('click', e => {
         .catch(e => {
             console.error(e)
         })
+})
+
+
+signOutBtns?.forEach(btn => {
+    btn.addEventListener('click', e => {
+        signOut(auth)
+            .then(() => {
+                sessionStorage.removeItem('user')
+                console.log('Signed out!')
+
+                const slashIndex = window.location.href.lastIndexOf('/')
+                const extensionIndex = window.location.href.indexOf('.html')
+                if (window.location.href.slice(slashIndex, extensionIndex) === '/user'){
+                    window.location.href = '/Tropizz/index.html'
+                    return
+                }
+                window.location.reload()
+            })
+            .catch(e => {
+                console.error(e)
+            })
+    })
 })

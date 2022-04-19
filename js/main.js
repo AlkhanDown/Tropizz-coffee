@@ -3,6 +3,8 @@ const hiddenMenu = document.querySelector('#hiddenMenu > ul')
 
 const goTopBtn = document.querySelector('#goTopBtn')
 
+const authAndAccountLinks = document.querySelectorAll('.authAndAccount')
+
 ScrollReveal().reveal('div:not(:is(.container, .links, #hiddenMenu))', {
     delay: 25,
     reset: true,
@@ -49,3 +51,17 @@ window.addEventListener("scroll", goTopBtnAnimation)
 goTopBtn.addEventListener('click', () => {
     window.scrollTo(0, 0)
 })
+
+const user = JSON.parse(sessionStorage.getItem('user'))
+if (user) {
+    authAndAccountLinks.forEach(link => {
+        const index = user.email.indexOf('@')
+        link.innerHTML = user.email.slice(0, index)
+        link.href = '/Tropizz/pages/user.html'
+    })
+} else {
+    const signOutBtns = document.querySelectorAll('.signOut')
+    signOutBtns.forEach(btn => {
+        btn.parentElement.remove()
+    })
+}
