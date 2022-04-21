@@ -31,6 +31,8 @@ const loginWithGoogleBtn = document.querySelector('#loginWithGoogleBtn')
 const signOutBtns = document.querySelectorAll('.signOut')
 
 registerBtn?.addEventListener('click', e => {
+    registerBtn.disabled = true
+
     const email = document.querySelector('#register_email').value
     const password = document.querySelector('#register_password').value
 
@@ -40,18 +42,44 @@ registerBtn?.addEventListener('click', e => {
 
             set(ref(database, `users/${user.uid}`), {email, password})
                 .then(() => {
-                    console.log(user)
+                    signInWithEmailAndPassword(auth, email, password)
+                        .then((userCredential) => {
+                            const user = userCredential.user
+                            const log_date = new Date()
+
+                            update(ref(database, `users/${user.uid}`), {last_login: log_date})
+                                .then(() => {
+                                    sessionStorage.setItem('user', JSON.stringify({
+                                        userId: user.uid,
+                                        email
+                                    }))
+                                    registerBtn.disabled = false
+                                    window.history.go(-1)
+                                })
+                                .catch(e => {
+                                    console.error(e)
+                                    registerBtn.disabled = false
+                                })
+                        })
+                        .catch(e => {
+                            console.error(e)
+                            registerBtn.disabled = false
+                        })
                 })
                 .catch(e => {
                     console.error(e)
+                    registerBtn.disabled = false
                 })
         })
         .catch(e => {
             console.error(e)
+            registerBtn.disabled = false
         })
 })
 
 loginBtn?.addEventListener('click', e => {
+    loginBtn.disabled = true
+
     const email = document.querySelector('#login_email').value
     const password = document.querySelector('#login_password').value
 
@@ -66,18 +94,23 @@ loginBtn?.addEventListener('click', e => {
                         userId: user.uid,
                         email
                     }))
+                    loginBtn.disabled = false
                     window.history.go(-1)
                 })
                 .catch(e => {
                     console.error(e)
+                    loginBtn.disabled = false
                 })
         })
         .catch(e => {
             console.error(e)
+            loginBtn.disabled = false
         })
 })
 
 loginWithGoogleBtn?.addEventListener('click', e => {
+    loginWithGoogleBtn.disabled = true
+
     signInWithPopup(auth, googleProvider)
         .then((userCredential) => {
             const user = userCredential.user
@@ -89,18 +122,17 @@ loginWithGoogleBtn?.addEventListener('click', e => {
                         userId: user.uid,
                         email: user.email
                     }))
+                    loginWithGoogleBtn.disabled = false
                     window.history.go(-1)
-
-                    // console.log(user)
-                    // console.log(window.history)
-                    // window.location.replace()
                 })
                 .catch(e => {
                     console.error(e)
+                    loginWithGoogleBtn.disabled = false
                 })
         })
         .catch(e => {
             console.error(e)
+            loginWithGoogleBtn.disabled = false
         })
 })
 
