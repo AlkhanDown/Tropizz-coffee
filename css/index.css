@@ -111,6 +111,7 @@ main section+section{
 }
 
 .cardText{
+    width: 100%;
     padding: 1rem;
 }
 
