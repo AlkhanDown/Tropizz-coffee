@@ -10,13 +10,13 @@ import {
 import {getDatabase, set, update, ref} from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBj5EaOF3I6sNRbI38NnQveyjk-U8rKM9M",
-    authDomain: "tropizz.firebaseapp.com",
-    databaseURL: "https://tropizz-default-rtdb.firebaseio.com",
-    projectId: "tropizz",
-    storageBucket: "tropizz.appspot.com",
-    messagingSenderId: "663105869951",
-    appId: "1:663105869951:web:fe4ed552ce4e2a83e2474a"
+    apiKey: "AIzaSyD6kXmjGovzh0ce9Q_lPQJbLB8vkyDPs04",
+    authDomain: "alkhan-ebe22.firebaseapp.com",
+    databaseURL: "https://alkhan-ebe22-default-rtdb.firebaseio.com/",
+    projectId: "alkhan-ebe22",
+    storageBucket: "alkhan-ebe22.appspot.com",
+    messagingSenderId: "767424477169",
+    appId: "1:767424477169:web:246df69114798df9737650"
 }
 
 const app = initializeApp(firebaseConfig)
