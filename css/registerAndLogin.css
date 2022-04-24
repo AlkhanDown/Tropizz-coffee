@@ -119,13 +119,9 @@ main .container > *{
      padding: 2rem 0;
  }
 
-.loginForm button, .registerForm button{
-    padding: .5rem;
-    background-color: transparent;
-    border: 2px solid rgba(var(--second-color), .4);
-
-    transition: all .3s ease-in-out;
-}
+/*.loginForm button, .registerForm button{*/
+/*    */
+/*}*/
 
 .btnGroup{
     display: flex;
@@ -134,19 +130,6 @@ main .container > *{
     gap: 1rem;
 
     margin-top: 1.5rem;
-}
-
-button{
-    outline: none;
-    transition: all .5s ease-in-out;
-}
-
-button:hover{
-    background-color: rgba(var(--second-color), .1);
-}
-
-button:focus{
-    border: 2px solid rgba(var(--main-color), .8);
 }
 
 /* Login */

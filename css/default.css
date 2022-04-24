@@ -36,6 +36,24 @@ body{
     width: 100%;
 }
 
+button{
+    padding: .5rem;
+
+    background-color: transparent;
+    border: 2px solid rgba(var(--second-color), .4);
+    outline: none;
+
+    transition: all .5s ease-in-out;
+}
+
+button:hover{
+    background-color: rgba(var(--second-color), .1);
+}
+
+button:focus{
+    border: 2px solid rgba(var(--main-color), .8);
+}
+
 a{
     color: rgba(var(--main-color), 1);
     text-decoration: none;

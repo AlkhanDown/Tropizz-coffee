@@ -40,6 +40,16 @@ a{
     border-radius: 10px;
 }
 
+.numberInCart{
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+
+    z-index: 4;
+    color: #fff;
+}
+
 .infoPart{
     width: 50%;
 

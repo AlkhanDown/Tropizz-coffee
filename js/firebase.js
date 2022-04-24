@@ -146,7 +146,7 @@ signOutBtns?.forEach(btn => {
 
                 const slashIndex = window.location.href.lastIndexOf('/')
                 const extensionIndex = window.location.href.indexOf('.html')
-                if (window.location.href.slice(slashIndex, extensionIndex) === '/user'){
+                if (window.location.href.slice(slashIndex, extensionIndex) === '/user') {
                     window.location.href = '/Tropizz/index.html'
                     return
                 }

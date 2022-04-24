@@ -1,0 +1,132 @@
+input{
+    width: 100%;
+    padding: .5rem 2rem .5rem 0;
+    border: none;
+    border-radius: 5px;
+
+    outline: none;
+}
+
+#userName{
+    font-size: 120%;
+}
+
+.userNameLabel{
+    position: relative;
+}
+
+.userNameLabel svg{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    filter: contrast(0);
+    pointer-events: none;
+}
+
+#email{
+    color: #a4a4a4;
+}
+
+main{
+    padding: 5rem 0 1rem;
+}
+
+main .container{
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+/*///////////////////////////////////////////////////////////////////////////////*/
+/*main .container > *{*/
+/*    border: 1px solid #333;*/
+/*}*/
+/*///////////////////////////////////////////////////////////////////////////////*/
+
+.accountInfo{
+    width: 30%;
+}
+
+.accountImg{
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.accountImg img{
+    border-radius: 100%;
+
+    aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center;
+
+    transition: all .5s ease-in-out;
+}
+
+.accountImg label{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    cursor: pointer;
+
+    opacity: 0;
+    transition: all .5s ease-in-out;
+
+    padding: .2rem .5rem;
+
+    background-color: #fafafa;
+    border: 1px solid rgba(var(--second-color), .15);
+    border-radius: 5px;
+}
+
+.accountImg:hover label{
+    opacity: 1;
+}
+
+.accountImg:hover img{
+    filter: brightness(.5);
+}
+
+#uploadImg{
+    display: none;
+}
+
+.userAddition{
+    width: calc(70% - 3rem);
+}
+
+.userAddition > *:first-child{
+    margin-top: 0;
+    padding-top: 0;
+}
+
+#cart{
+    margin-bottom: 2rem;
+}
+
+.productItem{
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+    gap: 2rem;
+}
+
+.productName{
+    width: 60%;
+}
+
+.productNumber{
+    text-align: center;
+    width: calc(20% - 2rem);
+}
+
+.deleteProduct{
+    text-align: center;
+    width: calc(20% - 2rem);
+}
+
+.orderProducts{
+    float: right;
+}
