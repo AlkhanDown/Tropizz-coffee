@@ -1,18 +1,21 @@
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js'
 import {
     getAuth,
+    onAuthStateChanged,
+    updateProfile,
     signOut,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js'
-import {getDatabase, set, update, ref} from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js'
+import { getDatabase, set, update, ref, child, get } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js'
+import { getStorage, ref as refStorage, uploadString, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js"
 
 const firebaseConfig = {
     apiKey: "AIzaSyD6kXmjGovzh0ce9Q_lPQJbLB8vkyDPs04",
     authDomain: "alkhan-ebe22.firebaseapp.com",
-    databaseURL: "https://alkhan-ebe22-default-rtdb.firebaseio.com/",
+    databaseURL: "https://alkhan-ebe22-default-rtdb.firebaseio.com",
     projectId: "alkhan-ebe22",
     storageBucket: "alkhan-ebe22.appspot.com",
     messagingSenderId: "767424477169",
@@ -23,12 +26,36 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth()
 const googleProvider = new GoogleAuthProvider()
 const database = getDatabase(app)
+const storage = getStorage(app)
 
 const registerBtn = document.querySelector('#registerBtn')
 const loginBtn = document.querySelector('#loginBtn')
 const loginWithGoogleBtn = document.querySelector('#loginWithGoogleBtn')
 
 const signOutBtns = document.querySelectorAll('.signOut')
+
+const userAvatar = document.querySelector('#userAvatar')
+const uploadInput = document.querySelector('#uploadImg')
+let uploadProgress = 0
+
+const userName = document.querySelector('#userName')
+
+const orderProductsBtn = document.querySelector('.orderProducts')
+
+if (userAvatar){
+    const refImgStorage = refStorage(storage, `${JSON.parse(sessionStorage.getItem('user')).userId}/img/userAvatar`)
+    getDownloadURL(refImgStorage).then(url => userAvatar.src = url)
+}
+
+const showErrMsg = err => {
+    const errEls = document.querySelectorAll('.errorMsg')
+    errEls.forEach(el => {
+        el.innerHTML = err.message
+        setTimeout(() => {
+            el.innerHTML = ''
+        }, 3000)
+    })
+}
 
 registerBtn?.addEventListener('click', e => {
     registerBtn.disabled = true
@@ -58,21 +85,25 @@ registerBtn?.addEventListener('click', e => {
                                 })
                                 .catch(e => {
                                     console.error(e)
+                                    showErrMsg(e)
                                     registerBtn.disabled = false
                                 })
                         })
                         .catch(e => {
                             console.error(e)
+                            showErrMsg(e)
                             registerBtn.disabled = false
                         })
                 })
                 .catch(e => {
                     console.error(e)
+                    showErrMsg(e)
                     registerBtn.disabled = false
                 })
         })
         .catch(e => {
             console.error(e)
+            showErrMsg(e)
             registerBtn.disabled = false
         })
 })
@@ -99,11 +130,13 @@ loginBtn?.addEventListener('click', e => {
                 })
                 .catch(e => {
                     console.error(e)
+                    showErrMsg(e)
                     loginBtn.disabled = false
                 })
         })
         .catch(e => {
             console.error(e)
+            showErrMsg(e)
             loginBtn.disabled = false
         })
 })
@@ -127,11 +160,13 @@ loginWithGoogleBtn?.addEventListener('click', e => {
                 })
                 .catch(e => {
                     console.error(e)
+                    showErrMsg(e)
                     loginWithGoogleBtn.disabled = false
                 })
         })
         .catch(e => {
             console.error(e)
+            showErrMsg(e)
             loginWithGoogleBtn.disabled = false
         })
 })
@@ -156,4 +191,86 @@ signOutBtns?.forEach(btn => {
                 console.error(e)
             })
     })
+})
+
+uploadInput?.addEventListener('change', e => {
+    const user = JSON.parse(sessionStorage.getItem('user'))
+    uploadImg(user.userId, e.target.files[0])
+})
+
+const uploadImg = (userId, img) => {
+    if (!userId || !img) return
+
+    const deleteRef = refStorage(storage, `${userId/img}`)
+    if (deleteRef && Number.isNaN(deleteRef)){
+        deleteObject(deleteRef).then(() => {
+            console.log('Deleted')
+        }).catch(err => console.error(err))
+    }
+
+    const storageRef = refStorage(storage, `${userId}/img/userAvatar`)
+    const uploadTask = uploadBytesResumable(storageRef, img)
+
+    uploadTask.on('state_changed', snapshot => {
+        const progress = Math.round(snapshot.bytesTransfered / snapshot.totalBytes) * 100
+        uploadProgress = progress
+    },
+        err => console.log(err),
+        () => {
+            getDownloadURL(uploadTask.snapshot.ref)
+                .then(url => userAvatar.src = url)
+        })
+}
+
+userName?.addEventListener('change', e => {
+    const user = auth.currentUser
+
+    updateProfile(user, { displayName: e.target.value })
+        .catch(e => console.error(e))
+})
+
+onAuthStateChanged(auth, (user) => {
+    if (user && userName) {
+        const name = user.displayName
+        userName.value = name
+    }
+})
+
+orderProductsBtn?.addEventListener('click', e => {
+    orderProductsBtn.disabled = true
+
+    const user = auth.currentUser
+    const orders = JSON.parse(sessionStorage.getItem('cart'))
+    if (!orders) {
+        orderProductsBtn.disabled = false
+        return console.log('empty!')
+    }
+
+    const date = new Date()
+
+    const userRef = database.ref(`users/${user.uid}`)
+    userRef.child('orders').set(orders)
+
+
+    // const uploadTask = uploadBytesResumable(storageRef, orders)
+
+
+
+    // uploadString(storageRef, orders, 'base64').then((snapshot) => {
+    //     sessionStorage.removeItem('cart')
+    //     console.log('success')
+    //     window.location.reload()
+    // })
+
+    // uploadTask.on('state_changed', snapshot => {
+    //         const progress = Math.round(snapshot.bytesTransfered / snapshot.totalBytes) * 100
+    //     },
+    //     err => console.log(err),
+    //     () => {
+    //         sessionStorage.removeItem('cart')
+    //         console.log('success')
+    //         window.location.reload()
+    //     })
+
+    orderProductsBtn.disabled = false
 })

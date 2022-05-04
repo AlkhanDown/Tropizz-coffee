@@ -54,7 +54,11 @@ main .container{
 }
 
 .accountImg img{
+    border: inset 3px rgba(var(--second-color), .5);
     border-radius: 100%;
+    box-shadow: .5rem .5rem 20px rgba(var(--second-color), .15);
+
+    pointer-events: none;
 
     aspect-ratio: 1;
     object-fit: cover;
@@ -94,7 +98,7 @@ main .container{
 }
 
 .userAddition{
-    width: calc(70% - 3rem);
+    width: calc(67.5% - 3rem);
 }
 
 .userAddition > *:first-child{

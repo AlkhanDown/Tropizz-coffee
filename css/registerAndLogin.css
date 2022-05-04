@@ -2,6 +2,11 @@ body{
     overflow: unset;
 }
 
+.errorMsg{
+    text-align: center;
+    color: red;
+}
+
 #goMain{
     position: fixed;
     top: 50%;

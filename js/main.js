@@ -115,31 +115,33 @@ addToCartBtn?.addEventListener('click', e => {
 if (cartContainer){
     const cart = JSON.parse(sessionStorage.getItem('cart'))
 
-    const createElement = (tagName = 'div') => document.createElement(tagName)
+    if (cart){
+        const createElement = (tagName = 'div') => document.createElement(tagName)
 
-    for (const arr of Object.entries(cart)){
-        const newProductElement = createElement()
-        newProductElement.classList.add('productItem')
+        for (const arr of Object.entries(cart)){
+            const newProductElement = createElement()
+            newProductElement.classList.add('productItem')
 
-        const productName = createElement()
-        productName.classList.add('productName')
-        const h3 = createElement('h3')
-        h3.innerHTML = arr[0]
-        productName.appendChild(h3)
+            const productName = createElement()
+            productName.classList.add('productName')
+            const h3 = createElement('h3')
+            h3.innerHTML = arr[0]
+            productName.appendChild(h3)
 
-        const productNumber = createElement()
-        productNumber.classList.add('productNumber')
-        productNumber.innerHTML = arr[1]
+            const productNumber = createElement()
+            productNumber.classList.add('productNumber')
+            productNumber.innerHTML = arr[1]
 
-        const deleteProductBtn = createElement('button')
-        deleteProductBtn.classList.add('deleteProduct')
-        deleteProductBtn.innerHTML = 'Удалить'
+            const deleteProductBtn = createElement('button')
+            deleteProductBtn.classList.add('deleteProduct')
+            deleteProductBtn.innerHTML = 'Удалить'
 
-        newProductElement.appendChild(productName)
-        newProductElement.appendChild(productNumber)
-        newProductElement.appendChild(deleteProductBtn)
+            newProductElement.appendChild(productName)
+            newProductElement.appendChild(productNumber)
+            newProductElement.appendChild(deleteProductBtn)
 
-        cartContainer.appendChild(newProductElement)
+            cartContainer.appendChild(newProductElement)
+        }
     }
 }
 
