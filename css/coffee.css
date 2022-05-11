@@ -67,8 +67,6 @@ a{
     }
 
     .imagePart{
-        position: unset;
-
         width: unset;
         padding: 5rem 0;
     }

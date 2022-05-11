@@ -70,7 +70,8 @@ input{
     padding: .7rem .5rem;
     outline: none;
 
-    border: 2px solid rgba(var(--second-color), .5);
+    border: inset 2px rgba(var(--second-color), .5);
+    box-shadow: .3rem .3rem 10px rgba(var(--second-color), .15);
 }
 
 input:focus{

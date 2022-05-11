@@ -68,15 +68,6 @@ main section+section{
     filter: drop-shadow(1rem 1rem 3rem rgba(var(--main-color), .3));
 }
 
-.breakLine{
-    filter: brightness(0);
-    user-select: none;
-
-    width: 25rem;
-    display: block;
-    margin: 3rem auto 0;
-}
-
 .cardsSection .container{
 
 }

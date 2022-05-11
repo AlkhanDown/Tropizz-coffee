@@ -1,17 +1,36 @@
+/**
+ * Импорт firebase и вспомогательных библиотек
+ */
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js'
 import {
     getAuth,
     onAuthStateChanged,
     updateProfile,
-    signOut,
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js'
-import { getDatabase, set, update, ref, child, get } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js'
-import { getStorage, ref as refStorage, uploadString, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js"
+import {
+    getDatabase,
+    set,
+    update,
+    ref,
+    child,
+    push
+} from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js'
+import {
+    getStorage,
+    ref as refStorage,
+    uploadBytesResumable,
+    getDownloadURL,
+    deleteObject
+} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js"
 
+/**
+ * Конфигурация firebase
+ * @type {{storageBucket: string, apiKey: string, messagingSenderId: string, appId: string, projectId: string, databaseURL: string, authDomain: string}}
+ */
 const firebaseConfig = {
     apiKey: "AIzaSyD6kXmjGovzh0ce9Q_lPQJbLB8vkyDPs04",
     authDomain: "alkhan-ebe22.firebaseapp.com",
@@ -22,31 +41,51 @@ const firebaseConfig = {
     appId: "1:767424477169:web:246df69114798df9737650"
 }
 
+/**
+ * Нужные переменные для работы с кодом
+ */
 const app = initializeApp(firebaseConfig)
 const auth = getAuth()
 const googleProvider = new GoogleAuthProvider()
 const database = getDatabase(app)
 const storage = getStorage(app)
 
+/**
+ * Кнопки регистрации, логина и выхода
+ * @type {Element}
+ */
 const registerBtn = document.querySelector('#registerBtn')
 const loginBtn = document.querySelector('#loginBtn')
 const loginWithGoogleBtn = document.querySelector('#loginWithGoogleBtn')
-
 const signOutBtns = document.querySelectorAll('.signOut')
 
+/**
+ * Аватарка пользователя и имя
+ * @type {Element}
+ */
 const userAvatar = document.querySelector('#userAvatar')
 const uploadInput = document.querySelector('#uploadImg')
+const userName = document.querySelector('#userName')
 let uploadProgress = 0
 
-const userName = document.querySelector('#userName')
-
+/**
+ * Кнопка "Заказать"
+ * @type {Element}
+ */
 const orderProductsBtn = document.querySelector('.orderProducts')
 
-if (userAvatar){
+/**
+ * Загрузка аватарки с базы данных
+ */
+if (userAvatar) {
     const refImgStorage = refStorage(storage, `${JSON.parse(sessionStorage.getItem('user')).userId}/img/userAvatar`)
     getDownloadURL(refImgStorage).then(url => userAvatar.src = url)
 }
 
+/**
+ * Для показа ошибки при регистрации или логина
+ * @param err
+ */
 const showErrMsg = err => {
     const errEls = document.querySelectorAll('.errorMsg')
     errEls.forEach(el => {
@@ -57,12 +96,16 @@ const showErrMsg = err => {
     })
 }
 
+/**
+ * Регистрация и сохранение в базе данных
+ */
 registerBtn?.addEventListener('click', e => {
     registerBtn.disabled = true
 
     const email = document.querySelector('#register_email').value
     const password = document.querySelector('#register_password').value
 
+    // Использование firebase для регистрации через email, password
     createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user
@@ -84,36 +127,36 @@ registerBtn?.addEventListener('click', e => {
                                     window.history.go(-1)
                                 })
                                 .catch(e => {
-                                    console.error(e)
                                     showErrMsg(e)
                                     registerBtn.disabled = false
                                 })
                         })
                         .catch(e => {
-                            console.error(e)
                             showErrMsg(e)
                             registerBtn.disabled = false
                         })
                 })
                 .catch(e => {
-                    console.error(e)
                     showErrMsg(e)
                     registerBtn.disabled = false
                 })
         })
         .catch(e => {
-            console.error(e)
             showErrMsg(e)
             registerBtn.disabled = false
         })
 })
 
+/**
+ * Логин через firebase
+ */
 loginBtn?.addEventListener('click', e => {
     loginBtn.disabled = true
 
     const email = document.querySelector('#login_email').value
     const password = document.querySelector('#login_password').value
 
+    // Использование firebase для входа через email, password
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user
@@ -123,27 +166,30 @@ loginBtn?.addEventListener('click', e => {
                 .then(() => {
                     sessionStorage.setItem('user', JSON.stringify({
                         userId: user.uid,
-                        email
+                        email: email
                     }))
                     loginBtn.disabled = false
                     window.history.go(-1)
                 })
                 .catch(e => {
-                    console.error(e)
                     showErrMsg(e)
                     loginBtn.disabled = false
                 })
         })
         .catch(e => {
-            console.error(e)
             showErrMsg(e)
             loginBtn.disabled = false
         })
 })
 
+
+/**
+ * Логин через Google account
+ */
 loginWithGoogleBtn?.addEventListener('click', e => {
     loginWithGoogleBtn.disabled = true
 
+    // Использование firebase для входа через Google
     signInWithPopup(auth, googleProvider)
         .then((userCredential) => {
             const user = userCredential.user
@@ -159,62 +205,67 @@ loginWithGoogleBtn?.addEventListener('click', e => {
                     window.history.go(-1)
                 })
                 .catch(e => {
-                    console.error(e)
                     showErrMsg(e)
                     loginWithGoogleBtn.disabled = false
                 })
         })
         .catch(e => {
-            console.error(e)
             showErrMsg(e)
             loginWithGoogleBtn.disabled = false
         })
 })
 
-
+/**
+ * Выход из аккаунта и перенаправление на главную страницу
+ */
 signOutBtns?.forEach(btn => {
     btn.addEventListener('click', e => {
-        signOut(auth)
-            .then(() => {
-                sessionStorage.removeItem('user')
-                console.log('Signed out!')
+        auth.signOut(auth).then(() => {
+            sessionStorage.removeItem('user')
 
-                const slashIndex = window.location.href.lastIndexOf('/')
-                const extensionIndex = window.location.href.indexOf('.html')
-                if (window.location.href.slice(slashIndex, extensionIndex) === '/user') {
-                    window.location.href = '/Tropizz/index.html'
-                    return
-                }
-                window.location.reload()
-            })
+            const slashIndex = window.location.href.lastIndexOf('/')
+            const extensionIndex = window.location.href.indexOf('.html')
+            if (window.location.href.slice(slashIndex, extensionIndex) === '/user') {
+                window.location.href = '/Tropizz/index.html'
+                return
+            }
+            window.location.reload()
+        })
             .catch(e => {
                 console.error(e)
             })
     })
 })
 
+/**
+ * Загрузка картинки при нажатии на кнопку смены аватарки пользователя
+ */
 uploadInput?.addEventListener('change', e => {
     const user = JSON.parse(sessionStorage.getItem('user'))
     uploadImg(user.userId, e.target.files[0])
 })
 
+/**
+ * Загрузка аватарки в базу данных через firebase
+ * @param userId ID Пользователя
+ * @param img Картинка для загрузки
+ */
 const uploadImg = (userId, img) => {
     if (!userId || !img) return
 
-    const deleteRef = refStorage(storage, `${userId/img}`)
-    if (deleteRef && Number.isNaN(deleteRef)){
+    const deleteRef = refStorage(storage, `${userId / img}`)
+    if (deleteRef && Number.isNaN(deleteRef)) {
         deleteObject(deleteRef).then(() => {
             console.log('Deleted')
         }).catch(err => console.error(err))
     }
-
     const storageRef = refStorage(storage, `${userId}/img/userAvatar`)
     const uploadTask = uploadBytesResumable(storageRef, img)
 
     uploadTask.on('state_changed', snapshot => {
-        const progress = Math.round(snapshot.bytesTransfered / snapshot.totalBytes) * 100
-        uploadProgress = progress
-    },
+            const progress = Math.round(snapshot.bytesTransfered / snapshot.totalBytes) * 100
+            uploadProgress = progress
+        },
         err => console.log(err),
         () => {
             getDownloadURL(uploadTask.snapshot.ref)
@@ -222,13 +273,18 @@ const uploadImg = (userId, img) => {
         })
 }
 
+/**
+ * Изменение имени и сохранение в базе данных при изменении input на странице пользователя
+ */
 userName?.addEventListener('change', e => {
     const user = auth.currentUser
-
-    updateProfile(user, { displayName: e.target.value })
+    updateProfile(user, {displayName: e.target.value})
         .catch(e => console.error(e))
 })
 
+/**
+ * Загрузка имени пользователя из базы данных
+ */
 onAuthStateChanged(auth, (user) => {
     if (user && userName) {
         const name = user.displayName
@@ -236,41 +292,29 @@ onAuthStateChanged(auth, (user) => {
     }
 })
 
+/**
+ * Загрузка списка заказов в базу данных при нажатии на кнопку
+ */
 orderProductsBtn?.addEventListener('click', e => {
     orderProductsBtn.disabled = true
 
     const user = auth.currentUser
+    const date = new Date().toUTCString()
     const orders = JSON.parse(sessionStorage.getItem('cart'))
     if (!orders) {
         orderProductsBtn.disabled = false
-        return console.log('empty!')
+        return
     }
 
-    const date = new Date()
-
-    const userRef = database.ref(`users/${user.uid}`)
-    userRef.child('orders').set(orders)
-
-
-    // const uploadTask = uploadBytesResumable(storageRef, orders)
-
-
-
-    // uploadString(storageRef, orders, 'base64').then((snapshot) => {
-    //     sessionStorage.removeItem('cart')
-    //     console.log('success')
-    //     window.location.reload()
-    // })
-
-    // uploadTask.on('state_changed', snapshot => {
-    //         const progress = Math.round(snapshot.bytesTransfered / snapshot.totalBytes) * 100
-    //     },
-    //     err => console.log(err),
-    //     () => {
-    //         sessionStorage.removeItem('cart')
-    //         console.log('success')
-    //         window.location.reload()
-    //     })
+    const newOrderKey = push(child(ref(database), `users/${user.uid}/orders`)).key
+    const updates = {}
+    updates[`/users/${user.uid}/orders/${date}/${newOrderKey}`] = {...orders}
 
     orderProductsBtn.disabled = false
+    sessionStorage.removeItem('cart')
+    update(ref(database), updates)
+        .then(() => {
+            window.location.reload()
+        })
+        .catch(e => console.log(e))
 })

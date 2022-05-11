@@ -7,6 +7,9 @@
     --container-width: 70%;
 
     --bebas: 'Bebas Neue', cursive;
+
+    --pointer: url("../img/coffeePointer.png"), auto;
+    --select-pointer: url("../img/coffeeSelectPointer.png"), auto;
 }
 
 *{
@@ -16,7 +19,7 @@
 html{
     scroll-behavior: smooth;
 
-    cursor: url("../img/coffeePointer.png"), auto;
+    cursor: var(--pointer);
 }
 
 body{
@@ -40,7 +43,8 @@ button{
     padding: .5rem;
 
     background-color: transparent;
-    border: 2px solid rgba(var(--second-color), .4);
+    border: inset 2px rgba(var(--second-color), .5);
+    box-shadow: .3rem .3rem 10px rgba(var(--second-color), .15);
     outline: none;
 
     transition: all .5s ease-in-out;
@@ -59,7 +63,7 @@ a{
     text-decoration: none;
     outline: none;
 
-    cursor: url("../img/coffeeSelectPointer.png"), auto;
+    cursor: var(--select-pointer);
     transition: all .5s ease-in-out;
 }
 
@@ -79,6 +83,15 @@ img{
 ul{
     margin: 0;
     padding: 0;
+}
+
+.breakLine{
+    filter: brightness(0);
+    user-select: none;
+
+    width: 25rem;
+    display: block;
+    margin: 3rem auto 0;
 }
 
 .clicked{
@@ -139,11 +152,11 @@ ul{
 #goTopBtn:hover{
     box-shadow: inset 0 0 10px rgba(var(--second-color), .2), .5rem .5rem 15px rgba(var(--second-color), .15);
 
-    cursor: url("../img/coffeeSelectPointer.png"), auto;
+    cursor: var(--select-pointer);
 }
 
 #goTopBtn > *:hover{
-    cursor: url("../img/coffeeSelectPointer.png"), auto;
+    cursor: var(--select-pointer);
 }
 
 #goTopBtn:active{

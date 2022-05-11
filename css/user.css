@@ -112,13 +112,20 @@ main .container{
 
 .productItem{
     display: flex;
-    justify-content: stretch;
+    justify-content: space-between;
     align-items: center;
     gap: 2rem;
 }
 
+.productItem + .productItem{
+    margin-top: 1rem;
+    border-top: 1px solid rgba(var(--second-color), .15);
+}
+
 .productName{
-    width: 60%;
+    /*width: 60%;*/
+    flex-grow: 1;
+    text-wrap: normal;
 }
 
 .productNumber{
@@ -128,9 +135,65 @@ main .container{
 
 .deleteProduct{
     text-align: center;
-    width: calc(20% - 2rem);
 }
 
 .orderProducts{
     float: right;
+}
+
+
+@media screen and (max-width: 1024px){
+    .productItem{
+        flex-wrap: wrap;
+        gap: 0;
+    }
+
+    .productItem .productName{
+        width: 80%;
+    }
+
+    .productItem .productNumber{
+        width: 20%;
+    }
+
+    .productItem .deleteProduct{
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 768px){
+    main .container{
+        flex-direction: column;
+    }
+
+    .accountInfo{
+        width: 100%;
+    }
+
+    form{
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    #userAvatar{
+        display: block;
+        width: 70%;
+        margin: 0 auto;
+    }
+
+    .userAddition{
+        width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 425px){
+    form{
+        width: 100%;
+    }
+
+    #userAvatar{
+        width: 100%;
+    }
 }
