@@ -44,12 +44,60 @@ if (userNameInput && userEmailInput) {
 }
 
 /**
+ * Функция для получения URL
+ * @return {string}
+ */
+const getCurrentPageLocation = () => {
+    const slashIndex = window.location.href.lastIndexOf('/')
+    const dotHtmlIndex = window.location.href.indexOf('.html')
+
+    return window.location.href.slice(slashIndex, dotHtmlIndex)
+}
+
+
+/**
  * Кнопка и часть отображения корзинки на сайте
  * @type {Element}
  */
 const addToCartBtn = document.querySelector('.addToCart')
 const cartContainer = document.querySelector('#cart')
 
+/**
+ * Логика заказа
+ * @type {Element}
+ */
+const firstOrderTime = document.querySelector('.firstOrderTime input')
+const sessionFirstOrderTime = sessionStorage.getItem('firstOrderTime')
+const orderProductsBtn = document.querySelector('.orderProducts')
+
+const checkCart = () => {
+    const cart = JSON.parse(sessionStorage.getItem('cart'))
+    if ((!cart ||  Object.keys(cart).length === 0) && getCurrentPageLocation() === '/user') {
+        orderProductsBtn.disabled = true
+        firstOrderTime.disabled = true
+    }
+    if ((cart &&  Object.keys(cart).length !== 0) && firstOrderTime) {
+        orderProductsBtn.disabled = false
+        firstOrderTime.disabled = false
+    }
+    if (sessionFirstOrderTime && firstOrderTime) firstOrderTime.value = sessionFirstOrderTime
+
+    const sessionCart = JSON.parse(sessionStorage.getItem('cart'))
+    if (firstOrderTime && (sessionCart && Object.keys(sessionCart).length === 0)) {
+        sessionStorage.setItem('firstOrderTime', '')
+        firstOrderTime.value = ''
+    }
+}
+
+if (getCurrentPageLocation() === '/user'){
+    checkCart()
+}
+
+firstOrderTime?.addEventListener('change', e => sessionStorage.setItem('firstOrderTime', e.target.value))
+
+/**
+ * Setting images lazy loading
+ */
 productsImages?.splice(0, 7).forEach(el => el.setAttribute('loading', 'lazy'))
 
 /**
@@ -109,18 +157,6 @@ if (user) {
         btn.parentElement.remove()
     })
 }
-
-/**
- * Функция для получения URL
- * @return {string}
- */
-const getCurrentPageLocation = () => {
-    const slashIndex = window.location.href.lastIndexOf('/')
-    const dotHtmlIndex = window.location.href.indexOf('.html')
-
-    return window.location.href.slice(slashIndex, dotHtmlIndex)
-}
-
 /**
  * Если пользователь вошёл в аккаунт, меняет стили навигационны=ой панели
  */
@@ -150,12 +186,26 @@ updateNumberOfProduct()
  * Добавление продукта в корзину и сохранение во временном хранилище
  */
 addToCartBtn?.addEventListener('click', e => {
+    const date = new Date()
     e.preventDefault()
     const newItem = getCurrentPageLocation().slice(1)
 
     let cart = JSON.parse(sessionStorage.getItem('cart'))
-    if (!cart) {
+    if (!cart || Object.keys(cart).length === 0) {
         sessionStorage.setItem('cart', JSON.stringify({ [newItem]: 1 }))
+
+        let hours = date.getHours()
+        let minutes = date.getMinutes()
+        if (+minutes + 15 >= 60){
+            hours = +hours + 1
+            minutes = +minutes - 45
+        } else {
+            minutes = +minutes + 15
+        }
+        hours = `${hours}`.length === 1 ? `0${hours}` : `${hours}`
+        minutes = `${minutes}`.length === 1 ? `0${minutes}` : `${minutes}`
+        const localTime = `${hours}:${minutes}`
+        sessionStorage.setItem('firstOrderTime', localTime)
     } else {
         const newList = cart[newItem]
             ? { ...cart, [newItem]: cart[newItem] + 1 }
@@ -163,7 +213,9 @@ addToCartBtn?.addEventListener('click', e => {
 
         sessionStorage.setItem('cart', JSON.stringify(newList))
     }
+
     updateNumberOfProduct()
+    checkCart()
 })
 
 /**
@@ -172,7 +224,7 @@ addToCartBtn?.addEventListener('click', e => {
 if (cartContainer){
     const cart = JSON.parse(sessionStorage.getItem('cart'))
 
-    if (cart){
+    if (cart && Object.keys(cart).length !== 0){
         const createElement = (tagName = 'div') => document.createElement(tagName)
 
         for (const arr of Object.entries(cart)){
@@ -217,7 +269,12 @@ deleteProductBtns?.forEach(btn => {
         delete cart[closestParentName.innerHTML]
         sessionStorage.setItem('cart', JSON.stringify(cart))
 
+        checkCart()
+
         btn.disabled = false
         window.location.reload()
     })
 })
+
+
+checkCart()

@@ -3,28 +3,28 @@
  */
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js'
 import {
-    getAuth,
-    onAuthStateChanged,
-    updateProfile,
     createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
+    getAuth,
     GoogleAuthProvider,
-    signInWithPopup
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signInWithPopup,
+    updateProfile
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js'
 import {
-    getDatabase,
-    set,
-    update,
-    ref,
     child,
-    push
+    getDatabase,
+    push,
+    ref,
+    set,
+    update
 } from 'https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js'
 import {
+    deleteObject,
+    getDownloadURL,
     getStorage,
     ref as refStorage,
-    uploadBytesResumable,
-    getDownloadURL,
-    deleteObject
+    uploadBytesResumable
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-storage.js"
 
 /**
@@ -286,10 +286,7 @@ userName?.addEventListener('change', e => {
  * Загрузка имени пользователя из базы данных
  */
 onAuthStateChanged(auth, (user) => {
-    if (user && userName) {
-        const name = user.displayName
-        userName.value = name
-    }
+    if (user && userName) userName.value = user.displayName
 })
 
 /**
@@ -300,6 +297,7 @@ orderProductsBtn?.addEventListener('click', e => {
 
     const user = auth.currentUser
     const date = new Date().toUTCString()
+    const firstOrderTime = sessionStorage.getItem('firstOrderTime')
     const orders = JSON.parse(sessionStorage.getItem('cart'))
     if (!orders) {
         orderProductsBtn.disabled = false
@@ -308,10 +306,11 @@ orderProductsBtn?.addEventListener('click', e => {
 
     const newOrderKey = push(child(ref(database), `users/${user.uid}/orders`)).key
     const updates = {}
-    updates[`/users/${user.uid}/orders/${date}/${newOrderKey}`] = {...orders}
+    updates[`/users/${user.uid}/orders/${date}-${firstOrderTime}/${newOrderKey}`] = {...orders}
 
     orderProductsBtn.disabled = false
     sessionStorage.removeItem('cart')
+    sessionStorage.removeItem('firstOrderTime')
     update(ref(database), updates)
         .then(() => {
             window.location.reload()
