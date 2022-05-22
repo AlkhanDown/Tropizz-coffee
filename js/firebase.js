@@ -311,9 +311,6 @@ orderProductsBtn?.addEventListener('click', async e => {
     const day = `${dateNow.getDay()}`.length === 1 ? `0${dateNow.getDay()}` : `${dateNow.getDay()}`
     const fullDateToGive = `${year}-${month}-${day} ${timeToGive}:00`
 
-    console.log(new Date(fullDateToGive))
-    debugger
-
     const message = {
         email: user.email,
         subject: 'Order success! ',
