@@ -291,7 +291,7 @@ onAuthStateChanged(auth, (user) => {
 /**
  * Загрузка списка заказов в базу данных при нажатии на кнопку
  */
-orderProductsBtn?.addEventListener('click', e => {
+orderProductsBtn?.addEventListener('click', async e => {
     orderProductsBtn.disabled = true
 
     const user = auth.currentUser
@@ -302,6 +302,33 @@ orderProductsBtn?.addEventListener('click', e => {
         orderProductsBtn.disabled = false
         return
     }
+
+    const timeToGive = sessionStorage.getItem('firstOrderTime')
+    const dateNow = new Date()
+
+    const year = dateNow.getFullYear()
+    const month = `${dateNow.getMonth()}`.length === 1 ?`0${dateNow.getMonth()}` : `${dateNow.getMonth()}`
+    const day = `${dateNow.getDay()}`.length === 1 ? `0${dateNow.getDay()}` : `${dateNow.getDay()}`
+    const fullDateToGive = `${year}-${month}-${day} ${timeToGive}:00`
+
+    console.log(new Date(fullDateToGive))
+    debugger
+
+    const message = {
+        email: user.email,
+        subject: 'Order success! ',
+        date: fullDateToGive,
+        text: 'Thanks for your order on Alkhan coffee bar! You will get them in 15 minutes. There are: '
+            + Object.entries(orders).reduce(
+                (acc, entry) => { return `${acc}${entry[0]}: ${entry[1]}; `}, '') + '.'
+    }
+
+    const url = 'http://localhost:5000/api/emailSender/sendEmail'
+    await fetch(url, {
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(message),
+        method: 'POST'
+    }).then(res => res.json()).then(data => console.log('Success', data))
 
     const newOrderKey = push(child(ref(database), `users/${user.uid}/orders`)).key
     const updates = {}
@@ -316,3 +343,4 @@ orderProductsBtn?.addEventListener('click', e => {
         })
         .catch(e => console.log(e))
 })
+
