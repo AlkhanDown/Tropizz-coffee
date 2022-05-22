@@ -1,4 +1,4 @@
-input{
+input {
     width: 100%;
     padding: .5rem 2rem .5rem 0;
     border: none;
@@ -7,7 +7,7 @@ input{
     outline: none;
 }
 
-input[type='time']{
+input[type='time'] {
     width: unset;
 
     padding: .3rem;
@@ -16,21 +16,21 @@ input[type='time']{
     border-radius: 0;
 }
 
-.firstOrderTime{
+.firstOrderTime {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-#userName{
+#userName {
     font-size: 120%;
 }
 
-.userNameLabel{
+.userNameLabel {
     position: relative;
 }
 
-.userNameLabel svg{
+.userNameLabel svg {
     position: absolute;
     right: 0;
     top: 50%;
@@ -39,15 +39,15 @@ input[type='time']{
     pointer-events: none;
 }
 
-#email{
+#email {
     color: #a4a4a4;
 }
 
-main{
+main {
     padding: 5rem 0 1rem;
 }
 
-main .container{
+main .container {
     display: flex;
     justify-content: space-between;
     gap: 3rem;
@@ -59,16 +59,16 @@ main .container{
 /*}*/
 /*///////////////////////////////////////////////////////////////////////////////*/
 
-.accountInfo{
+.accountInfo {
     width: 30%;
 }
 
-.accountImg{
+.accountImg {
     position: relative;
     margin-bottom: 2rem;
 }
 
-.accountImg img{
+.accountImg img {
     border: inset 3px rgba(var(--second-color), .5);
     border-radius: 100%;
     box-shadow: .5rem .5rem 20px rgba(var(--second-color), .15);
@@ -82,7 +82,7 @@ main .container{
     transition: all .5s ease-in-out;
 }
 
-.accountImg label{
+.accountImg label {
     position: absolute;
     left: 50%;
     top: 50%;
@@ -100,119 +100,119 @@ main .container{
     border-radius: 5px;
 }
 
-.accountImg:hover label{
+.accountImg:hover label {
     opacity: 1;
 }
 
-.accountImg:hover img{
+.accountImg:hover img {
     filter: brightness(.5);
 }
 
-#uploadImg{
+#uploadImg {
     display: none;
 }
 
-.userAddition{
+.userAddition {
     width: calc(67.5% - 3rem);
 }
 
-.userAddition > *:first-child{
+.userAddition > *:first-child {
     margin-top: 0;
     padding-top: 0;
 }
 
-#cart{
+#cart {
     margin-bottom: 2rem;
 }
 
-.firstOrderTime p{
+.firstOrderTime p {
     text-align: right;
 }
 
-.productItem{
+.productItem {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 2rem;
 }
 
-.productItem + .productItem{
+.productItem + .productItem {
     margin-top: 1rem;
     border-top: 1px solid rgba(var(--second-color), .15);
 }
 
-.productName{
+.productName {
     /*width: 60%;*/
     flex-grow: 1;
     text-wrap: normal;
 }
 
-.productNumber{
+.productNumber {
     text-align: center;
     width: calc(20% - 2rem);
 }
 
-.deleteProduct{
+.deleteProduct {
     text-align: center;
 }
 
-.orderProducts{
+.orderProducts {
     float: right;
 }
 
 
-@media screen and (max-width: 1024px){
-    .productItem{
+@media screen and (max-width: 1024px) {
+    .productItem {
         flex-wrap: wrap;
         gap: 0;
     }
 
-    .productItem .productName{
+    .productItem .productName {
         width: 80%;
     }
 
-    .productItem .productNumber{
+    .productItem .productNumber {
         width: 20%;
     }
 
-    .productItem .deleteProduct{
+    .productItem .deleteProduct {
         width: 100%;
     }
 }
 
 
-@media screen and (max-width: 768px){
-    main .container{
+@media screen and (max-width: 768px) {
+    main .container {
         flex-direction: column;
     }
 
-    .accountInfo{
+    .accountInfo {
         width: 100%;
     }
 
-    form{
+    form {
         width: 70%;
         margin: 0 auto;
     }
 
-    #userAvatar{
+    #userAvatar {
         display: block;
         width: 70%;
         margin: 0 auto;
     }
 
-    .userAddition{
+    .userAddition {
         width: 100%;
     }
 }
 
 
-@media screen and (max-width: 425px){
-    form{
+@media screen and (max-width: 425px) {
+    form {
         width: 100%;
     }
 
-    #userAvatar{
+    #userAvatar {
         width: 100%;
     }
 }

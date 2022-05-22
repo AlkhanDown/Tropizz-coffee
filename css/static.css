@@ -76,7 +76,7 @@ nav .container {
     align-items: center;
 }
 
-#hiddenMenu svg{
+#hiddenMenu svg {
     transition: all .5s;
 }
 
@@ -172,10 +172,12 @@ footer .container {
         flex-direction: column;
         gap: 1.5rem;
     }
-    .footer_links{
+
+    .footer_links {
         width: 100%;
     }
-    .mini_contacts{
+
+    .mini_contacts {
         align-items: start;
         width: 100%;
     }

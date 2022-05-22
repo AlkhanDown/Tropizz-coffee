@@ -1,15 +1,15 @@
-section{
+section {
     padding: 4rem 0;
 }
 
-main .container .mapDetails{
+main .container .mapDetails {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 5rem;
 }
 
-.addresses{
+.addresses {
     width: calc(50% - 5rem);
 
     display: flex;
@@ -19,47 +19,47 @@ main .container .mapDetails{
     gap: 1rem;
 }
 
-.addresses :is(h1, h2, h3, h4, h5, h6, p){
+.addresses :is(h1, h2, h3, h4, h5, h6, p) {
     margin: 0;
 }
 
-.address{
+.address {
     padding: 1rem;
 
     box-shadow: .2rem .2rem 10px rgba(51, 51, 51, .2), -.2rem -.2rem 10px rgba(51, 51, 51, .1);
     transition: all .5s ease;
 }
 
-.address:hover{
+.address:hover {
     cursor: var(--select-pointer);
     background-color: rgba(var(--second-color), .06);
     transform: scale(1.05);
 }
 
-.clickedLocation{
+.clickedLocation {
     background-color: rgba(var(--second-color), .08);
 }
 
-.googleMap{
+.googleMap {
     width: calc(50%);
 }
 
-#map{
+#map {
     width: 100%;
     aspect-ratio: 5 / 6;
 }
 
-#contactUs{
+#contactUs {
     background: url(../img/rightSideCoffee.jpg) no-repeat bottom right / contain;
 }
 
-#contactUs :is(h1, h2, h3, h4, h5, h6){
+#contactUs :is(h1, h2, h3, h4, h5, h6) {
     text-align: center;
 
     text-shadow: 0 0 5px #fff;
 }
 
-form{
+form {
     width: 70%;
     margin: 0 auto;
 
@@ -72,7 +72,7 @@ form{
     backdrop-filter: blur(5px);
 }
 
-input, textarea{
+input, textarea {
     width: 100%;
 
     outline: none;
@@ -82,71 +82,71 @@ input, textarea{
     padding: 0.7rem 0.5rem;
 }
 
-input[type='submit']{
+input[type='submit'] {
     width: unset;
     display: block;
     margin: 0 0 0 auto;
     background-color: #fff;
 }
 
-input[type='submit']:hover{
+input[type='submit']:hover {
     cursor: var(--select-pointer);
     background-color: rgba(var(--second-color), .1);
 }
 
-textarea + input[type='submit']{
+textarea + input[type='submit'] {
     margin-top: 2rem;
 }
 
-textarea{
+textarea {
     resize: vertical;
     min-height: 15ch;
     max-height: 50ch;
 }
 
-label + input{
+label + input {
     margin: .8rem 0 2rem;
 }
 
-input + textarea{
+input + textarea {
     margin-top: .8rem;
 }
 
 
-@media screen and (max-width: 768px){
-    .mapDetails{
+@media screen and (max-width: 768px) {
+    .mapDetails {
         flex-direction: column;
     }
 
-    .addresses{
+    .addresses {
         width: 100%;
     }
 
-    .googleMap{
+    .googleMap {
         width: 100%;
     }
 
-    #map{
+    #map {
         aspect-ratio: 4 / 3;
     }
 
-    #contactUs{
+    #contactUs {
         background-image: none;
     }
 
-    form{
+    form {
         width: 80%;
         backdrop-filter: none;
     }
 }
 
 
-@media screen and (max-width: 425px){
-    form{
+@media screen and (max-width: 425px) {
+    form {
         padding: 1rem 2rem;
     }
 
-    input[type='submit']{
+    input[type='submit'] {
         margin: 0;
         width: 100%;
     }

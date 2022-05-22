@@ -1,16 +1,16 @@
 /*Products*/
 
-main .container{
+main .container {
     display: flex;
     justify-content: space-between;
     gap: 2rem;
 }
 
-.productLinksList{
+.productLinksList {
     width: 25%;
 }
 
-.productLinksList ul{
+.productLinksList ul {
     margin: 0;
     padding: 0;
     list-style: inside url("../img/coffee.svg");
@@ -19,31 +19,33 @@ main .container{
     top: 5rem;
 }
 
-.productLinksList ul li:first-of-type{
+.productLinksList ul li:first-of-type {
     list-style: none;
 }
 
-.productLinksList li{
+.productLinksList li {
     font-size: 1.1rem;
     padding: 1rem 0;
 }
 
-.productLinksList li+li{
+.productLinksList li + li {
     border-top: 1px solid rgba(var(--second-color), .15);
 }
 
 
-
-
-.productsList{
+.productsList {
     width: 75%;
 }
 
-.productsList h2{
+.productsList h2 {
     border-bottom: 1px solid rgba(var(--second-color), .1);
 }
 
-.cards{
+.productsList p {
+    flex-grow: 1;
+}
+
+.cards {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
@@ -51,16 +53,16 @@ main .container{
     gap: 2rem;
 }
 
-.cards+h2{
+.cards + h2 {
     margin-top: 4rem;
 }
 
-.cards::after{
+.cards::after {
     content: '';
     width: calc((100% - 4rem) / 3);
 }
 
-.card{
+.card {
     display: flex;
     justify-content: start;
     align-items: center;
@@ -72,12 +74,10 @@ main .container{
     box-shadow: 1rem 1rem 5rem rgba(var(--second-color), .125);
     border: 1px solid rgba(var(--second-color), .15);
     border-radius: 15px;
-
-    /*width: 30%;*/
 }
 
 
-.cardImg img{
+.cardImg img {
     width: 100%;
     object-fit: cover;
     object-position: center 15%;
@@ -87,11 +87,43 @@ main .container{
     aspect-ratio: 4 / 3;
 }
 
-.cardText{
+.cardText {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
     padding: 1rem;
 }
 
-.card a{
+.cardOrderNumber {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+
+    padding: .5rem 0 1rem;
+}
+
+.cardOrderNumber input {
+    outline: none;
+    /*border: none;*/
+    border: 1px solid rgba(var(--main-color), .5);
+    border-radius: 10px;
+
+    text-align: center;
+    width: 100%;
+    padding: .5rem;
+}
+
+.cardOrderNumber button {
+    aspect-ratio: 1;
+
+    border: 1px solid rgba(var(--second-color), .15);
+    border-radius: 100%;
+    padding: .3rem .6rem;
+}
+
+.card a {
     display: inline-flex;
     align-items: center;
     gap: .3rem;
@@ -100,72 +132,28 @@ main .container{
 }
 
 
-
-
-
 @media (max-width: 1440px) {
-    /*.cards{*/
-    /*    flex-direction: column;*/
-    /*    align-items: center;*/
-    /*}*/
-    .card{
+    .card {
         flex-basis: calc((100% - 2rem) / 2);
     }
-    /*.card+.card{*/
-    /*    margin-top: 5rem;*/
-    /*}*/
-    /*.cardImg img{*/
-    /*    aspect-ratio: 4 / 3;*/
-    /*}*/
 }
 
-/*@media screen and (max-width: 1200px) {*/
-/*    .offer_text{*/
-/*        font-size: 120%;*/
-/*    }*/
-/*}*/
-
-/*@media screen and (max-width: 1024px) {*/
-/**/
-/*}*/
-
 @media screen and (max-width: 768px) {
-    main .container{
+    main .container {
         flex-direction: column;
     }
 
-    .productLinksList{
+    .productLinksList {
         width: 100%;
     }
 
-    .productsList{
+    .productsList {
         width: 100%;
     }
-
-    /*.card{*/
-    /*    flex-basis: calc((100% - 2rem) / 2);*/
-    /*}*/
-
-
-/*    .offer_text{*/
-/*        font-size: 100%;*/
-/*    }*/
-/*    .breakLine{*/
-/*        width: 60%;*/
-/*    }*/
-/*    .article{*/
-/*        flex-direction: column-reverse !important;*/
-/*    }*/
-/*    .articleText{*/
-/*        width: 80%;*/
-/*    }*/
-/*    .articleImg{*/
-/*        width: 80%;*/
-/*    }*/
 }
 
 @media screen and (max-width: 425px) {
-    .card{
+    .card {
         flex-basis: 100%;
     }
 }

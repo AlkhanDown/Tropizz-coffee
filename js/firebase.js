@@ -182,7 +182,6 @@ loginBtn?.addEventListener('click', e => {
         })
 })
 
-
 /**
  * Логин через Google account
  */
